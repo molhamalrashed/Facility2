@@ -1,0 +1,19 @@
+.message-container {
+    position: absolute;
+    width: 40%;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(55, 33, 254, 0.384);
+    color: rgba(255, 255, 255, 0.797);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.message-text {
+    margin: 0;
+}

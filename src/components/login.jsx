@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import usersData from '../DummyData.js';
+import '../App.css';
 
 const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const [showMessage, setShowMessage] = useState(false);
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -21,12 +23,18 @@ const Login = () => {
         } else {
             setMessage('User not found');
         }
+        setEmail('');
+        setPassword('');
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+        }, 2000);
     }
     return (
         <div className="container d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#f0f0f0' }}>
             <div className="card p-4 shadow-sm" style={{ backgroundColor:"#7de5fa", maxWidth: '600px', width: '100%' }}>
                 <h1 className="mb-4 p-2 text-white text-center">WISH lite user</h1>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <div className="form-group">
                             <input 
@@ -51,19 +59,23 @@ const Login = () => {
                         </div>
                     </div>
                     <div className="d-flex justify-content-center py-3">
-                        <button 
-                        type="submit"
-                        className="btn btn-primary btn-block" 
-                        style={{width:'50%'}}
-                        onClick={handleSubmit}
-                        >Login</button>
+                        <button
+                            type="submit"
+                            className="btn btn-primary btn-block"
+                            style={{ width: '50%' }}
+                        >Login
+                        </button>
                     </div>
                     <div className="d-flex justify-content-between">
                         <a href="/sign-up" className="btn btn-link">Sign Up</a>
                         <a href="/reset-password" className="btn btn-link">Forgot Password</a>
                     </div>
                 </form>
-                {message && <p className="text-center mt-3">{message}</p>}
+                {showMessage && (
+                    <div className="message-container">
+                        <p className='message-text'>{message}</p>
+                    </div>
+                )}
             </div>
         </div>
     );
