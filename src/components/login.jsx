@@ -33,7 +33,7 @@ const Login = () => {
     return (
         <div className="container d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#f0f0f0' }}>
             <div className="card p-4 shadow-sm" style={{ backgroundColor:"#7de5fa", maxWidth: '600px', width: '100%' }}>
-                <h1 className="mb-4 p-2 text-white text-center">WISH lite user</h1>
+                <h1 className="mb-4 p-2 text-white">WISH lite user</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <div className="form-group">
