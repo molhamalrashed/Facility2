@@ -718,5 +718,4 @@ const usersData = [
     }
   ]
   
-  export default usersData;
-  
+export default usersData;

@@ -1,27 +1,69 @@
-import React from 'react';
+import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import usersData from '../DummyData.js';
 
 const Login = () => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const user = usersData.find((user) => user.email === email);
+        if(user){
+            if(user.password === password){
+                setMessage('Login successful');
+                window.location.href = '/landing';
+            } else {
+                setMessage('Incorrect password');
+            }
+        } else {
+            setMessage('User not found');
+        }
+    }
     return (
-        <div className="container d-flex justify-content-center align-items-center vh-100">
-            <div className="card p-4 shadow-sm" style={{ maxWidth: '400px', width: '100%' }}>
-                <h1 className="mb-4 text-center">Login</h1>
+        <div className="container d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#f0f0f0' }}>
+            <div className="card p-4 shadow-sm" style={{ backgroundColor:"#7de5fa", maxWidth: '600px', width: '100%' }}>
+                <h1 className="mb-4 p-2 text-white text-center">WISH lite user</h1>
                 <form>
-                    <div className="form-group">
-                        <label htmlFor="exampleInputEmail1">Email address</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-                        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <div className="mb-3">
+                        <div className="form-group">
+                            <input 
+                            type="email" 
+                            className="form-control" 
+                            id="exampleInputEmail1" 
+                            placeholder="Enter email"
+                            value={email}
+                            onChange={(e)=> setEmail(e.target.value)}
+                            />
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="exampleInputPassword1">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+                    <div className="mb-3">
+                        <div className="form-group">
+                            <input 
+                            type="password" 
+                            className="form-control" 
+                            id="exampleInputPassword1" 
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e)=> setPassword(e.target.value)} />
+                        </div>
                     </div>
-                    <div className="form-group form-check">
-                        <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                        <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+                    <div className="d-flex justify-content-center py-3">
+                        <button 
+                        type="submit"
+                        className="btn btn-primary btn-block" 
+                        style={{width:'50%'}}
+                        onClick={handleSubmit}
+                        >Login</button>
                     </div>
-                    <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                    <div className="d-flex justify-content-between">
+                        <a href="/sign-up" className="btn btn-link">Sign Up</a>
+                        <a href="/reset-password" className="btn btn-link">Forgot Password</a>
+                    </div>
                 </form>
+                {message && <p className="text-center mt-3">{message}</p>}
             </div>
         </div>
     );
