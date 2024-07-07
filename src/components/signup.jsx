@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+import { getUsersData, addNewUser } from '../DummyData';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import usersData from '../DummyData.js';
 import '../App.css';
 
 const SignUp = () => {
@@ -13,23 +13,20 @@ const SignUp = () => {
     const [message, setMessage] = useState('');
     const [showMessage, setShowMessage] = useState(false);
 
+    const usersData = getUsersData();
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         const emailExists = usersData.some(user => user.email === email);
         if (emailExists) {
-            console.log(emailExists);
             setMessage('Email is already used. Please use a different email.');
-            setShowMessage(true);
-                setTimeout(() => {
-                setShowMessage(false);
-             }, 2000);
             eraseInput();
             return;
         }
 
         const userIds = usersData.map(user => user.userId);
-        const maxId = Math.max(...userIds);
+        const maxId = Math.max(...userIds, 0); // Ensure the initial maxId is 0 if no users exist
         const newUserId = maxId + 1;
 
         const newUser = {
@@ -41,19 +38,22 @@ const SignUp = () => {
             email,
             password
         };
-        usersData.push(newUser);
-        console.log(newUser);
 
-        eraseInput();
+    
+        addNewUser(newUser);
+        console.log(usersData);
         setMessage('SignUp successful!');
+        eraseInput();
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 2000);
+    };
+
+    const eraseInput = () => {
         setShowMessage(true);
         setTimeout(() => {
             setShowMessage(false);
         }, 2000);
-        window.location.href = '/landing';
-    };
-
-    const eraseInput = () => {
         setFirstName('');
         setLastName('');
         setGender('');
@@ -61,7 +61,7 @@ const SignUp = () => {
         setEmail('');
         setPassword('');
     };
-    
+
     return (
         <div className="container d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#f0f0f0' }}>
             <div className="card p-4 shadow-sm" style={{ backgroundColor: "#7de5fa", maxWidth: '600px', width: '100%' }}>
