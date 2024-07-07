@@ -5,6 +5,7 @@ import Login from './components/login';
 import SignUp from './components/signup';
 import ResetPassword from './components/reset-password';
 import Landing from './components/landing';
+import Profile from './components/profile';
 
 const App = () => {
   return (
@@ -14,7 +15,7 @@ const App = () => {
           <Route path="/" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/landing" element={<Landing />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Router>
     </UsersProvider>

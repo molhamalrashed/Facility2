@@ -37,8 +37,7 @@ export const usersData = [
           yearBuilt: 2010,
           amenities: ["balcony"],
           photos: [
-            "https://images.unsplash.com/photo-1506748686214-e9dfac2239c4",
-            "https://images.unsplash.com/photo-1506748686214-e9dfac2239c4"
+            "https://res.cloudinary.com/dtb1hpuil/image/upload/v1720385613/joel-filipe-RFDP7_80v5A-unsplash_vxprjl.jpg",
           ],
           listingDate: "2023-01-15",
           lastRenovationDate: "2022-12-01",
@@ -146,8 +145,7 @@ export const usersData = [
           yearBuilt: 2005,
           amenities: ["garden", "garage"],
           photos: [
-            "https://images.unsplash.com/photo-1506748686214-e9dfac2239c4",
-            "https://images.unsplash.com/photo-1506748686214-e9dfac2239c4"
+            "https://res.cloudinary.com/dtb1hpuil/image/upload/v1720385660/digital-marketing-agency-ntwrk-g39p1kDjvSY-unsplash_fwajrn.jpg"
           ],
           listingDate: "2023-02-20",
           lastRenovationDate: "2023-01-10",
@@ -268,8 +266,7 @@ export const usersData = [
           yearBuilt: 2015,
           amenities: ["rooftop terrace", "gym"],
           photos: [
-            "https://images.unsplash.com/photo-1506748686214-e9dfac2239c4",
-            "https://images.unsplash.com/photo-1506748686214-e9dfac2239c4"
+            "https://res.cloudinary.com/dtb1hpuil/image/upload/v1720385660/digital-marketing-agency-ntwrk-g39p1kDjvSY-unsplash_fwajrn.jpg"
           ],
           listingDate: "2023-03-10",
           lastRenovationDate: "2023-02-01",
@@ -388,8 +385,7 @@ export const usersData = [
           yearBuilt: 2012,
           amenities: ["garden", "swimming pool", "sauna"],
           photos: [
-            "https://images.unsplash.com/photo-1506748686214-e9dfac2239c4",
-            "https://images.unsplash.com/photo-1506748686214-e9dfac2239c4"
+                "https://res.cloudinary.com/dtb1hpuil/image/upload/v1720385657/ronnie-george-9gGvNWBeOq4-unsplash_wnz8jt.jpg"
           ],
           listingDate: "2023-04-05",
           lastRenovationDate: "2023-03-01",
@@ -510,8 +506,7 @@ export const usersData = [
           yearBuilt: 2008,
           amenities: ["garden", "riverside view"],
           photos: [
-            "https://images.unsplash.com/photo-1506748686214-e9dfac2239c4",
-            "https://images.unsplash.com/photo-1506748686214-e9dfac2239c4"
+            "https://res.cloudinary.com/dtb1hpuil/image/upload/v1720385655/brian-babb-XbwHrt87mQ0-unsplash_e2m8ed.jpg"
           ],
           listingDate: "2023-05-15",
           lastRenovationDate: "2023-04-01",
@@ -632,8 +627,7 @@ export const usersData = [
           yearBuilt: 1900,
           amenities: ["fireplace", "attic"],
           photos: [
-            "https://images.unsplash.com/photo-1506748686214-e9dfac2239c4",
-            "https://images.unsplash.com/photo-1506748686214-e9dfac2239c4"
+            "https://res.cloudinary.com/dtb1hpuil/image/upload/v1720385647/etienne-beauregard-riverin-B0aCvAVSX8E-unsplash_pxbyjm.jpg"
           ],
           listingDate: "2023-06-01",
           lastRenovationDate: "2023-05-01",

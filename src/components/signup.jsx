@@ -41,7 +41,6 @@ const SignUp = () => {
 
     
         addNewUser(newUser);
-        console.log(usersData);
         setMessage('SignUp successful!');
         eraseInput();
         setTimeout(() => {
