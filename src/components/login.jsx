@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import usersData from '../DummyData.js';
+import {getUsersData} from '../DummyData.js';
 import '../App.css';
 
 const Login = () => {
@@ -9,10 +9,11 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const [showMessage, setShowMessage] = useState(false);
+    const data = getUsersData();
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        const user = usersData.find((user) => user.email === email);
+        const user = data.find((user) => user.email === email);
         if(user){
             if(user.password === password){
                 setMessage('Login successful');

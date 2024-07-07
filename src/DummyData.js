@@ -1,4 +1,15 @@
-const usersData = [
+export const getUsersData = () => {
+  const data = localStorage.getItem('usersData');
+  return data ? JSON.parse(data) : usersData;
+}
+
+export const addNewUser = (newUser) => {
+  const data = getUsersData();
+  data.push(newUser);
+  localStorage.setItem('usersData', JSON.stringify(data));
+}
+
+export const usersData = [
     {
       userId: 1,
       firstName: "John",
@@ -718,4 +729,3 @@ const usersData = [
     }
   ]
   
-export default usersData;
