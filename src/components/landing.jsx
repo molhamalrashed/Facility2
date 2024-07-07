@@ -1,9 +1,15 @@
 import React from "react";
+import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
+import '@progress/kendo-theme-material/dist/all.css';
+import { getUsersData} from "../DummyData";
+
+const usersData = getUsersData(100);
 
 const Landing = () => {
     return (
         <>
-        <h2>Hello from the Landing</h2>
+        <Grid
+        data={usersData}></Grid>
         </>
     )
 }

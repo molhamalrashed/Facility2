@@ -11,13 +11,16 @@ const Login = () => {
     const [showMessage, setShowMessage] = useState(false);
     const data = getUsersData();
     
+    
     const handleSubmit = (e) => {
+        console.log("Data",data);
         e.preventDefault();
         const user = data.find((user) => user.email === email);
         if(user){
             if(user.password === password){
                 setMessage('Login successful');
-                window.location.href = '/landing';
+                sessionStorage.setItem('userEmail', email);
+                window.location.href = '/profile';
             } else {
                 setMessage('Incorrect password');
             }
@@ -30,6 +33,9 @@ const Login = () => {
         setTimeout(() => {
             setShowMessage(false);
         }, 2000);
+        if(!localStorage.getItem('usersData')){
+            localStorage.setItem('usersData', JSON.stringify(data));
+        }
     }
     return (
         <div className="container d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#f0f0f0' }}>
