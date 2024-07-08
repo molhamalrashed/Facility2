@@ -1,5 +1,4 @@
 import React , {useState} from 'react';
-import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -9,6 +8,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Modal from 'react-bootstrap/Modal'; // for the pop-up modal
+import CardRender from './card';
 import '../App.css';
 
 const Profile = () => {
@@ -46,11 +46,22 @@ const Profile = () => {
         setShowModal(false);
     }
 
+    const handleSelectProperty = (property) => {
+        sessionStorage.setItem('selectedProperty', JSON.stringify(property));
+        window.location.href = '/landing';
+    }
+
+    const handleHomeButton = () => {
+        sessionStorage.removeItem('selectedCategory');
+        sessionStorage.removeItem('selectedProperty');
+        window.location.href = '/profile';
+    }
+
     return (
         <div className="container">
             <Navbar expand="lg" className="bg-body-tertiary">
                 <Container fluid>
-                    <Navbar.Brand href="/profile">Home</Navbar.Brand>
+                    <Navbar.Brand style={{cursor: 'pointer'}} onClick={handleHomeButton}>Home</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                     <Nav
@@ -59,8 +70,14 @@ const Profile = () => {
                         navbarScroll
                     >
                         <NavDropdown title="My properties" id="navbarScrollingDropdown">
-                            {currentUser.properties.map((property) =>  (
-                                <NavDropdown.Item href="/landing" key={property.propertyId}>{property.propertyName}</NavDropdown.Item>
+                        {currentUser.properties.map((property) => (
+                                <NavDropdown.Item
+                                    href="#"
+                                    key={property.propertyId}
+                                    onClick={() => handleSelectProperty(property)}
+                                >
+                                    {property.propertyName}
+                                    </NavDropdown.Item>
                                 ))}
                           </NavDropdown>
                     </Nav>
@@ -94,20 +111,13 @@ const Profile = () => {
 
             {currentUser ? (
                 <>
-                    <h2>Welcome, {currentUser.firstName} {currentUser.lastName}</h2>
+                    <div className='welcome-container'>
+                    <h2 className='welcome-message'>Welcome, {currentUser.firstName} {currentUser.lastName}</h2>
+                    </div>
                     <Row>
                         {currentUser.properties? currentUser.properties.map((property) => (
                             <Col key={property.propertyId} xs={12} md={6} lg={4} className="mb-4">
-                                <Card style={{ width: '18rem'}}>
-                                    <Card.Img variant="top" src={property.photos} />
-                                    <Card.Body>
-                                        <Card.Title>{property.propertyName}</Card.Title>
-                                        <Card.Text>
-                                            {property.description}
-                                        </Card.Text>
-                                        <Button variant="primary">Go somewhere</Button>
-                                    </Card.Body>
-                                </Card>
+                                <CardRender property={property} />
                             </Col>
                         )) : (<p>There are no properties yet</p>)}
                     </Row>
