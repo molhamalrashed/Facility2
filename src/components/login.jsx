@@ -29,13 +29,17 @@ const Login = () => {
         }
         setEmail('');
         setPassword('');
+        displayMessage();
+        if(!localStorage.getItem('usersData')){
+            localStorage.setItem('usersData', JSON.stringify(data));
+        }
+    }
+
+    const displayMessage = () => {
         setShowMessage(true);
         setTimeout(() => {
             setShowMessage(false);
         }, 2000);
-        if(!localStorage.getItem('usersData')){
-            localStorage.setItem('usersData', JSON.stringify(data));
-        }
     }
     return (
         <div className="container d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#f0f0f0' }}>

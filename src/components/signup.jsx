@@ -10,6 +10,7 @@ const SignUp = () => {
     const [nationality, setNationality] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
     const [showMessage, setShowMessage] = useState(false);
 
@@ -17,6 +18,18 @@ const SignUp = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if(password.length < 8){
+            setMessage('Password must be at least 8 characters');
+            displayMessage();
+            return;
+        }
+
+        if(password !== confirmPassword){
+            setMessage('Passwords do not match');
+            displayMessage();
+            return;
+        }   
 
         const emailExists = usersData.some(user => user.email === email);
         if (emailExists) {
@@ -59,7 +72,17 @@ const SignUp = () => {
         setNationality('');
         setEmail('');
         setPassword('');
+        setConfirmPassword('');
     };
+
+    const displayMessage = () => {
+        setPassword('');
+        setConfirmPassword('');
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+        }, 2000);
+    }
 
     return (
         <div className="container d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#f0f0f0' }}>
@@ -137,6 +160,18 @@ const SignUp = () => {
                                 placeholder="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div className="mb-3">
+                        <div className="form-group">
+                            <input 
+                                type="password" 
+                                className="form-control" 
+                                placeholder="Confirm your Password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)} 
                                 required
                             />
                         </div>
