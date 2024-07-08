@@ -3,7 +3,7 @@ import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
 import '@progress/kendo-theme-material/dist/all.css';
 import { getUsersData} from "../DummyData";
 
-const usersData = getUsersData(100);
+const usersData = getUsersData();
 
 const Landing = () => {
     return (

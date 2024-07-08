@@ -16,6 +16,7 @@ const App = () => {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/landing" element={<Landing />} />
         </Routes>
       </Router>
     </UsersProvider>

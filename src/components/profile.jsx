@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
@@ -8,24 +8,49 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Modal from 'react-bootstrap/Modal'; // for the pop-up modal
+import '../App.css';
 
 const Profile = () => {
     const userEmail = sessionStorage.getItem('userEmail');
     const usersDataString = localStorage.getItem('usersData');
     const usersData = usersDataString ? JSON.parse(usersDataString) : [];
-
     const currentUser = usersData.find((user) => user.email === userEmail);
+
+    const [showModal, setShowModal] = useState(false);
+    const [actionType, setActionType] = useState('');
 
     const handleLogout = () => {
         sessionStorage.removeItem('userEmail');
         window.location.href = '/';
     }
 
+    const handleDeleteAccount = () => {  
+        const newUsersData = usersData.filter((user) => user.email !== userEmail);
+        localStorage.setItem('usersData', JSON.stringify(newUsersData));
+        sessionStorage.removeItem('userEmail');
+        window.location.href = '/';
+    }
+
+    const handleShowModal = (action) => {  // action can be 'logout' or 'delete
+        setActionType(action);
+        setShowModal(true);
+    }
+
+    const handleConfirmAction = () => {   // this function is called when the user clicks the 'Yes' button in the modal
+        if (actionType === 'logout') {
+            handleLogout();
+        } else if (actionType === 'delete') {
+            handleDeleteAccount();
+        }
+        setShowModal(false);
+    }
+
     return (
         <div className="container">
             <Navbar expand="lg" className="bg-body-tertiary">
                 <Container fluid>
-                    <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+                    <Navbar.Brand href="/profile">Home</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                     <Nav
@@ -33,25 +58,40 @@ const Profile = () => {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Nav.Link href="#action1">Home</Nav.Link>
-                        <Nav.Link href="#action2">Link</Nav.Link>
-                        <NavDropdown title="Link" id="navbarScrollingDropdown">
-                        <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action4">
-                            Another action
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action5">
-                            Something else here
-                        </NavDropdown.Item>
-                        </NavDropdown>
+                        <NavDropdown title="My properties" id="navbarScrollingDropdown">
+                            {currentUser.properties.map((property) =>  (
+                                <NavDropdown.Item href="/landing" key={property.propertyId}>{property.propertyName}</NavDropdown.Item>
+                                ))}
+                          </NavDropdown>
                     </Nav>
-                    <Form className="d-flex">
-                        <Button variant="outline-success" onClick={handleLogout}>Logout</Button>
+                    <Form className="d-flex me-3">
+                        <Button variant="outline-success" onClick={()=>handleShowModal('logout')}>Logout</Button>
+                    </Form>
+                    <Form className="d-flex me-3">
+                        <Button variant="outline-success" onClick={()=> handleShowModal('delete')}>Delete my account</Button>
                     </Form>
                     </Navbar.Collapse>
                 </Container>
                 </Navbar>
+
+                 {/* Modal to confirm logout and delete account */}
+                <Modal show={showModal} onHide={() => setShowModal(false)}> 
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Action</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {actionType === 'logout' ? 'Are you sure you want to logout?' : 'Are you sure you want to delete your account?'}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={handleConfirmAction}>
+                        Confirm
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
             {currentUser ? (
                 <>
                     <h2>Welcome, {currentUser.firstName} {currentUser.lastName}</h2>
