@@ -9,6 +9,25 @@ export const addNewUser = (newUser) => {
   localStorage.setItem('usersData', JSON.stringify(data));
 }
 
+export const categories = [
+  "realEstateDocuments",
+  "notifications",
+  "tasks",
+  "delivery",
+  "hours",
+  "reservations",
+  "lease",
+  "facilities",
+  "policies",
+  "measurements",
+  "purchases",
+  "suppliers",
+  "portfolio",
+  "contractDocuments",
+  "inventories",
+  "lendingPool"
+];
+
 export const usersData = [
     {
       userId: 1,
@@ -37,7 +56,7 @@ export const usersData = [
           yearBuilt: 2010,
           amenities: ["balcony"],
           photos: [
-            "https://res.cloudinary.com/dtb1hpuil/image/upload/v1720385613/joel-filipe-RFDP7_80v5A-unsplash_vxprjl.jpg",
+            "https://res.cloudinary.com/dtb1hpuil/image/upload/v1720385648/bailey-anselme-Bkp3gLygyeA-unsplash_utsheg.jpg",
           ],
           listingDate: "2023-01-15",
           lastRenovationDate: "2022-12-01",
@@ -266,7 +285,7 @@ export const usersData = [
           yearBuilt: 2015,
           amenities: ["rooftop terrace", "gym"],
           photos: [
-            "https://res.cloudinary.com/dtb1hpuil/image/upload/v1720385660/digital-marketing-agency-ntwrk-g39p1kDjvSY-unsplash_fwajrn.jpg"
+            "https://res.cloudinary.com/dtb1hpuil/image/upload/v1720385657/ronnie-george-9gGvNWBeOq4-unsplash_wnz8jt.jpg"
           ],
           listingDate: "2023-03-10",
           lastRenovationDate: "2023-02-01",

@@ -101,7 +101,7 @@ const ResetPassword = () => {
                             type="submit"
                             className="btn btn-primary btn-block"
                             style={{ width: '50%' }}
-                        >Login
+                        >Reset
                         </button>
                     </div>
                     <div className="d-flex justify-content-between">
