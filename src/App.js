@@ -6,6 +6,7 @@ import SignUp from "./components/signup";
 import ResetPassword from "./components/reset-password";
 import Landing from "./components/landing";
 import Profile from "./components/profile";
+import RegisterProperty from "./components/registerProperty";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/landing" element={<Landing />} />
+          <Route path="/register-form" element={<RegisterProperty />} />
         </Routes>
       </Router>
     </UsersProvider>

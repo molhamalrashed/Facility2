@@ -25,8 +25,6 @@ const Profile = () => {
   const [showModal, setShowModal] = useState(false);
   const [actionType, setActionType] = useState("");
 
-  console.log(currentCategory, "notifications");
-
   const handleLogout = () => {
     sessionStorage.removeItem("userEmail");
     window.location.href = "/";
@@ -141,9 +139,13 @@ const Profile = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <div className="grid">
-        <Grid data={currentProperty[currentCategory]}></Grid>
-      </div>
+      {currentCategory ? (
+        <div className="grid">
+          <Grid data={currentProperty[currentCategory]}></Grid>
+        </div>
+      ) : (
+        <h1>Choose a category</h1>
+      )}
     </div>
   );
 };

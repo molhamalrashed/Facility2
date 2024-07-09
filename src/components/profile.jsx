@@ -154,6 +154,7 @@ const Profile = () => {
               <p>There are no properties yet</p>
             )}
           </Row>
+          <Button variant="primary" href="/register-form">Add Property</Button>
         </>
       ) : (
         <p>User not found</p>

@@ -28,7 +28,7 @@ function MovieRender({ property }) {
   };
 
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card style={{ width: "18rem"}}>
       <Card.Img variant="top" src={property.photos[0]} />
       <Card.Body>
         <Card.Title>{property.propertyName}</Card.Title>
