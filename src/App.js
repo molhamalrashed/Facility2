@@ -7,6 +7,7 @@ import ResetPassword from "./components/reset-password";
 import Landing from "./components/landing";
 import Profile from "./components/profile";
 import RegisterProperty from "./components/registerProperty";
+import AddNotification from "./components/addNotification";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/landing" element={<Landing />} />
           <Route path="/register-form" element={<RegisterProperty />} />
+          <Route path="/add-notification" element={<AddNotification />} />
         </Routes>
       </Router>
     </UsersProvider>
