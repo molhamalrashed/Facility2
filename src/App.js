@@ -1,11 +1,11 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { UsersProvider } from './components/UserContext';
-import Login from './components/login';
-import SignUp from './components/signup';
-import ResetPassword from './components/reset-password';
-import Landing from './components/landing';
-import Profile from './components/profile';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { UsersProvider } from "./components/UserContext";
+import Login from "./components/login";
+import SignUp from "./components/signup";
+import ResetPassword from "./components/reset-password";
+import Landing from "./components/landing";
+import Profile from "./components/profile";
 
 const App = () => {
   return (
@@ -21,6 +21,6 @@ const App = () => {
       </Router>
     </UsersProvider>
   );
-}
+};
 
 export default App;
