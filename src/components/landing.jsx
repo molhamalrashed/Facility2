@@ -7,9 +7,14 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Modal from "react-bootstrap/Modal"; // for the pop-up modal
 import { categories } from "../DummyData";
-import { Grid } from "@progress/kendo-react-grid";
+import { Grid, GridColumn } from "@progress/kendo-react-grid";
+import { filterBy} from '@progress/kendo-data-query';
+import DeliveryItemsCell from "./kendo/deliveryItemCell";
+import RoomDimensions from "./kendo/roomDimensions";
+import PriorityCell from "./kendo/priorityCell";
 import "@progress/kendo-theme-material/dist/all.css";
 import "../App.css";
+
 
 const Profile = () => {
   const userEmail = sessionStorage.getItem("userEmail");
@@ -24,6 +29,18 @@ const Profile = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [actionType, setActionType] = useState("");
+  const [filter, setFilter] = useState(null);
+  const [skip, setSkip] = useState(0);
+  const [pageSize, setPageSize] = useState(2);
+
+  const handleFilterChange = (event) => {
+    setFilter(event.filter);
+  };
+
+  const handlePageChange = (event) => {
+    setSkip(event.page.skip);
+    setPageSize(event.page.take);
+  };
 
   const handleLogout = () => {
     sessionStorage.removeItem("userEmail");
@@ -141,7 +158,55 @@ const Profile = () => {
       </Modal>
       {currentCategory ? (
         <div className="grid">
-          <Grid data={currentProperty[currentCategory]}></Grid>
+          {currentCategory === "notifications" ? (
+          <Grid data={currentProperty[currentCategory]}>
+            <GridColumn field="notificationType" title="Notification Type" />
+            <GridColumn field="message" title="Message" />
+            <GridColumn field="notificationDate" title="Notification Date" />
+            <GridColumn field="status" title="Status" />
+            <GridColumn field="assignedTo" title="Assigned to" />
+            <GridColumn field="priority" title="Priority" cell={PriorityCell} />
+          </Grid>
+      ) : currentCategory === "delivery" ? (
+        <Grid data={currentProperty[currentCategory]}>
+          <GridColumn field="deliveryDate" title="Delivery Date" />
+          <GridColumn field="deliveryStatus" title="Delivery Status" />
+          <GridColumn field="deliveryItems" title="Delivery Items" cell={DeliveryItemsCell} />
+        </Grid>
+      ) : currentCategory === "measurements" ? (
+        <Grid data={currentProperty[currentCategory]}>
+          <GridColumn field="areaSize" title="Area Size" />
+          <GridColumn field="roomDimensions" title="Room Dimension" cell={RoomDimensions} />
+        </Grid>
+      ) : currentCategory === "purchases" ? (
+        <Grid
+          data={filterBy(currentProperty[currentCategory], filter)}
+          filterable
+          filter={filter}
+          onFilterChange={handleFilterChange}
+        >
+          <GridColumn field="purchaseDate" title="Purchase Date" filter="date" />
+          <GridColumn field="purchaseAmount" title="Purchase Amount" filter="numeric" />
+          <GridColumn field="purchaseDescription" title="Purchase Description" />
+          <GridColumn field="vendor" title="Vendor" />
+        </Grid>
+      ) : currentCategory === "tasks" ? (
+            <Grid
+              data={currentProperty[currentCategory].slice(skip, skip + pageSize)}
+              pageable
+              total={currentProperty[currentCategory].length}
+              skip={skip}
+              pageSize={pageSize}
+              onPageChange={handlePageChange}
+            >
+              <GridColumn field="taskName" title="Task Name" />
+              <GridColumn field="taskDescription" title="Task Description" />
+              <GridColumn field="assignedTo" title="Assigned To" />
+              <GridColumn field="dueDate" title="Due Date" />
+              <GridColumn field="taskStatus" title="Task Status" />
+              <GridColumn field="priority" title="Priority" />
+            </Grid>
+          ) : (<Grid data={currentProperty[currentCategory]}></Grid>)}
         </div>
       ) : (
         <h1>Choose a category</h1>
