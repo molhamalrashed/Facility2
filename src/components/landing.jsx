@@ -81,6 +81,10 @@ const Profile = () => {
     window.location.href = "/profile";
   };
 
+  const handleAddNotification = () => {
+    window.location.href = "/add-notification";
+  }
+
   return (
     <div className="container">
       <Navbar expand="lg" className="bg-body-tertiary">
@@ -210,6 +214,11 @@ const Profile = () => {
         </div>
       ) : (
         <h1>Choose a category</h1>
+      )}
+      {currentCategory && (
+        <Button style={{ marginTop: '2rem' }} variant="primary" onClick={handleAddNotification}>
+          {"Add New " + currentCategory}
+        </Button>
       )}
     </div>
   );
